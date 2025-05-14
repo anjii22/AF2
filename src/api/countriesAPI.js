@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // Set the base URL for the API
-const BASE_URL = import.meta.env.VITE_COUNTRIES_URL;
+const BASE_URL = "https://restcountries.com/v3.1";
 
 // Get all countries with essential fields
 export const getAllCountries = async () => {
