@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // Validate and set the base URL for the REST Countries API
-const BASE_URL = import.meta.env.VITE_COUNTRIES_URL;
+const BASE_URL = 'https://restcountries.com/v3.1';
 if (!BASE_URL) {
   throw new Error('VITE_COUNTRIES_URL is not defined in environment variables.');
 }
