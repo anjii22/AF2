@@ -1,45 +1,8 @@
-# 🌍 WorldMap Explorer
+# React + Vite
 
-Explore the world, one country at a time.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-**WorldMap Explorer** is a modern React application powered by the [REST Countries API](https://restcountries.com/), offering a beautiful, responsive interface to search, filter, and discover countries around the globe. View key information like capital, population, currencies, map location, street view, and more all in one place.
+Currently, two official plugins are available:
 
-
-## ✨ Features
-
-- 🔎 **Search & Filter** — Instantly search by name or region.
-- 🗺️ **Interactive Details** — Dive deep into country info, including:
-  - Population, area, region & subregion
-  - Capital, languages, and currencies
-  - Driving side, borders
-  - Maps via Google Maps & StreetMap links
-- 🌐 **REST Countries API Integration** — Fast and reliable real-time data.
-- 🎨 **Responsive Design** — Tailwind CSS-powered, mobile-friendly UI.
-
-
-
-## 🚧 Live Demo
-
-> [🔗 View the live app here](https://your-deployment-url.com)
-
-
-
-## 🛠️ Tech Stack
-
-- **React**
-- **React Router**
-- **Tailwind CSS**
-- **Vite**
-- **REST Countries API**
-
-
-
-## 📦 Getting Started
-
-### 1. Clone the Repository
-### 2. Install Dependancies 
-- npm install
-### 3. Add Environment Variable (.env)
-- VITE_COUNTRIES_URL= (REST COUNTRIES API)
-### 4. Run the Development Server
-- npm run dev
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh

@@ -4,76 +4,76 @@ import {
   setUserSession, 
   clearUserSession, 
   isAuthenticated as checkAuth,
-  generateGuestId
+  getCurrentUser,
+  loginUser,
+  registerUser
 } from '../utils/authUtils';
 
-// Create auth context
 const AuthContext = createContext();
 
-// Auth provider component
 export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [userId, setUserId] = useState(null);
+  const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // Check for existing session on initial load
   useEffect(() => {
-    const checkSession = () => {
-      const session = getUserSession();
-      
-      if (session) {
-        setIsAuthenticated(true);
-        setUserId(session.userId);
-      } else {
-        // Create a guest session for demonstration purposes
-        createGuestSession();
-      }
-      
-      setLoading(false);
-    };
-
     checkSession();
   }, []);
 
-  // Create a guest session
-  const createGuestSession = () => {
-    const guestId = generateGuestId();
-    // One day expiration for guest sessions
-    setUserSession(guestId, 86400000); 
-    setIsAuthenticated(true);
-    setUserId(guestId);
+  const checkSession = () => {
+    const session = getUserSession();
+    if (session) {
+      const currentUser = getCurrentUser();
+      setIsAuthenticated(true);
+      setUser(currentUser);
+    }
+    setLoading(false);
   };
 
-  // Log out user
-  const logout = () => {
-    clearUserSession();
-    setIsAuthenticated(false);
-    setUserId(null);
-  };
-
-  // The context value
-  const authContextValue = {
-    isAuthenticated,
-    userId,
-    loading,
-    logout,
-    refreshSession: () => {
-      // Refresh the current session
-      const current = getUserSession();
-      if (current) {
-        setUserSession(current.userId);
-      }
+  const login = async (email, password) => {
+    try {
+      const user = loginUser(email, password);
+      setIsAuthenticated(true);
+      setUser(user);
+      return user;
+    } catch (error) {
+      throw error;
     }
   };
 
+  const register = async (email, password) => {
+    try {
+      const user = registerUser(email, password);
+      setIsAuthenticated(true);
+      setUser(user);
+      return user;
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  const logout = () => {
+    clearUserSession();
+    setIsAuthenticated(false);
+    setUser(null);
+  };
+
+  const value = {
+    isAuthenticated,
+    user,
+    loading,
+    login,
+    register,
+    logout
+  };
+
   return (
-    <AuthContext.Provider value={authContextValue}>
+    <AuthContext.Provider value={value}>
       {children}
     </AuthContext.Provider>
   );
 };
 
-// Custom hook to use auth context
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (!context) {
